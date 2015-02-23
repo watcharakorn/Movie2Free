@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
 <addon id="plugin.video.movie2free"
-       name="Movie2Free"
+       name="Moive2Free"
        version="1.0.0"
        provider-name="watcharakorn/narbandit">
   <requires>
@@ -13,8 +13,8 @@
   <extension point="xbmc.addon.metadata">
     <platform>all</platform>
     <language></language>
-    <summary lang="en">uPlayHD</summary>
-    <summary lang="th">uPlayHD</summary>
+    <summary lang="en">Movie2Free</summary>
+    <summary lang="th">Movie2Free</summary>
     <description lang="en">This Plugin provides access to movies on website http://www.movie2free.com</description>
     <description lang="th">This Plugin provides access to movies on website http://www.movie2free.com</description>
   </extension>
