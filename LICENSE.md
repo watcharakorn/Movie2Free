@@ -1,0 +1,1 @@
+GNU License for distribute
