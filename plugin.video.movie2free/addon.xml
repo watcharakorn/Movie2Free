@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addons>
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="plugin.video.movie2free" name="Movie2Free" version="2.0.7" provider-name="watcharakorn/narbandit">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
@@ -16,4 +15,3 @@
     <description lang="th">ปลั๊กอินนี้ใช้สำหรับดูภาพยนต์จากเวปไซต์ [CR] http://www.movie2free.com และ http://www.serie2free.com ฟรี</description>
   </extension>
 </addon>
-</addons>
