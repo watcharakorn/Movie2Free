@@ -1,3 +1,47 @@
 <23/02/2015>
 *version: 1.0.0
-*created
+*-created
+<24/02/2015>
+*version: 1.0.1
+*-Fix bug import libary error for android.
+<24/02/2015>
+*version: 1.0.2
+*-Fix show incorrect title for some charactor (-, ', &)
+*-Add Search function
+<25/02/2015>
+*version: 1.0.3
+*-Update Search function
+<26/02/2015>
+*version: 1.0.4
+*-Add Thai and English Language
+<25/05/2015>
+*version: 1.0.5
+*-Add truelive tv
+<08/07/2015>
+*version: 1.0.6
+*-Fix movie links incorrected.
+<01/08/2015>
+*version: 1.0.7
+*-Fix episode info changed.
+*-Fix unicode character in movie' name.  
+*version: 2.0.0
+*-Add Serie2free
+<28/11/2015>
+*version: 2.0.2
+*-change to https server
+<26/02/2016>
+*version: 2.0.3
+*-fix movie player list error
+<27/02/2016>
+*version: 2.0.4
+*-fix error PROTOCOL_TLSv1_2
+<09/03/2016>
+*version: 2.0.5 
+*-fix movie player list error
+<28/03/2016>
+*version: 2.0.6 
+*-fix movie player list error
+<17/05/2016>
+*version: 2.0.7 
+*-add new movie series
+*-fix movie player list error 
