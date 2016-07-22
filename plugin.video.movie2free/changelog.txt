@@ -44,4 +44,8 @@
 <17/05/2016>
 *version: 2.0.7 
 *-add new movie series
-*-fix movie player list error 
+*-fix movie player list error
+<22/07/2016>
+*version: 2.0.8 
+*-fix tv channel list error
+ 
