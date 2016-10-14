@@ -48,4 +48,8 @@
 <22/07/2016>
 *version: 2.0.8 
 *-fix tv channel list error
+<13/10/2016>
+*version: 2.0.9 
+*-fix tv channel list error
+*-fix movies episode list error
  
