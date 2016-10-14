@@ -52,4 +52,7 @@
 *version: 2.0.9 
 *-fix tv channel list error
 *-fix movies episode list error
+<14/10/2016>
+*version: 2.1.0 
+*-fix movies episode list error
  
