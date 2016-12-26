@@ -225,12 +225,12 @@ def list_videos(url):
         title = title.replace('&#8211;',"-").replace('&#8217;',"'").replace('&amp;', '&').replace('&#038;', '&').replace('&#8230;', '...').replace('&#8216;', '\'').replace('&nbsp;', '') 	
         addDir(title,url2,4,img,True,total)
 
-    page = re.compile('<div class="navigation"><ul>(.+?)</ul></div>').findall(html)
+    page = re.compile('<div class="navigation">.+?<ul>(.+?)</ul>').findall(html)
     if len(page)>0:
         navigation = page[0]
         page = re.compile('<a href="(.+?)"(.+?)</a>').findall(navigation)
         for x in range(0, len(page)):
-            if page[x][1]==' >หน้าต่อไป':
+            if page[x][1]=='>ต่อไป':
                 addDir(_('nextpage')+' >>',page[x][0],2,artfolder + 'Next.jpg')
                 break
 
