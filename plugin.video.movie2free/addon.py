@@ -331,13 +331,13 @@ def list_episodes(url):
                             a.append(temp)
 
 
-    episodelink = re.compile('var \$data = (.+?)"}]};').findall(html)
+    episodelink = re.compile('var \$data = (.+?)"}};').findall(html)
     
     if len(episodelink) >0:
-        episodelink[0] = episodelink[0]+'"}]}'
+        episodelink[0] = episodelink[0]+'"}}'
         json_movie = json.loads(episodelink[0])
         episode_title = json_movie['title']
-        for datas in json_movie['data']:
+        for datas in json_movie['videos']:
             episodelnk = str(datas['data'])            
             subtitle = datas['title']
             
