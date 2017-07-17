@@ -238,15 +238,18 @@ def list_videos(url):
 
 def list_episodes(url):
     html = open_url(url)
-    html = html.replace('\n','') 
+    html = html.replace('\n','')
+    html = html.replace('&#x3A;',':')
+    html = html.replace('&#x2F;','/') 
     
-    movieinfo = re.compile('<div class="movie-header">.+?<img src="(.+?)".+?<strong>(.+?)</strong>').findall(html)
+    #movieinfo = re.compile('<div class="movie-header">.+?<img src="(.+?)".+?<strong>(.+?)</strong>').findall(html)
+    movieinfo = re.compile('<div class="box-header">.+?title="(.+?)".+?<div class="movie-thumbnail">.+?<img src="(.+?)"').findall(html)
     movie_img =''
     movie_name =''
     episode = ''
     if len(movieinfo) > 0:
-        movie_img = movieinfo[0][0]
-        movie_name  = movieinfo[0][1]
+        movie_name  = movieinfo[0][0]
+        movie_img = movieinfo[0][1]
         #movie_name = movie_name.replace('&#8211;',"-").replace('&#8217;',"'")
     a = []    
     #TH - HD
@@ -333,34 +336,52 @@ def list_episodes(url):
 
     episodelink = re.compile('var \$data = (.+?)"}};').findall(html)
     
-    if len(episodelink) >0:
+    if len(episodelink) >0:        
         episodelink[0] = episodelink[0]+'"}}'
         json_movie = json.loads(episodelink[0])
         episode_title = json_movie['title']
-        for datas in json_movie['videos']:
-            episodelnk = str(datas['data'])            
-            subtitle = datas['title']
+        if json_movie.get('videos'):        
+            for datas in json_movie['videos']:
+                episodelnk = str(datas['data'])            
+                subtitle = datas['title']
+                
+                if len(episodelnk)>0 and episodelnk<>'None':                
+                    episodelnk.replace(')','').replace('\r','').replace('\t','').replace("'",'\"').replace('\/','/')
+                    episode = open_url(episodelnk)
             
-            if len(episodelnk)>0 and episodelnk<>'None':                
-                episodelnk.replace(')','').replace('\r','').replace('\t','').replace("'",'\"').replace('\/','/')
-                episode = open_url(episodelnk)
-        
-                if len(episode) > 0:
-                                
-                    if episode.find('"sources":') >=0:
-                        #episode[y] = episode[y].replace('[','').replace('{','').replace(')','').replace('\r','').replace('\t','').replace("file",'"file"').replace("label",'"label"').replace("type",'"type"').replace("provider",'"provider"').replace('bitrate','"bitrate"').replace("'",'\"').replace('\/','/')
-                        episode = episode.replace(')','').replace('\r','').replace('\t','').replace("'",'\"').replace('\/','/')
-                        #episode = '[' + episode +'}]'                
-                        json_data = json.loads(episode)
-                        for sources in json_data['sources']:
-                            url = str(sources['url'])
-                            title = episode_title + ' (' + subtitle +' ' + str(sources['quality']) +')'
-                            stype = str(sources['type'])
-                            if len(url)>0:
-                                temp = [url,title,movie_img,stype] 
-                                a.append(temp)
+                    if len(episode) > 0:
+                                    
+                        if episode.find('"sources":') >=0:
+                            #episode[y] = episode[y].replace('[','').replace('{','').replace(')','').replace('\r','').replace('\t','').replace("file",'"file"').replace("label",'"label"').replace("type",'"type"').replace("provider",'"provider"').replace('bitrate','"bitrate"').replace("'",'\"').replace('\/','/')
+                            episode = episode.replace(')','').replace('\r','').replace('\t','').replace("'",'\"').replace('\/','/')
+                            #episode = '[' + episode +'}]'                
+                            json_data = json.loads(episode)
+                            for sources in json_data['sources']:
+                                url = str(sources['url'])
+                                title = episode_title + ' (' + subtitle +' ' + str(sources['quality']) +')'
+                                stype = str(sources['type'])
+                                if len(url)>0:
+                                    temp = [url,title,movie_img,stype] 
+                                    a.append(temp)
 
-                             
+    episodelink = re.compile('<a class="btn-video" data-video="(.+?)".+?data-video-title="(.+?)"').findall(html)
+    
+    if len(episodelink) >0:
+        for y in range(0, len(episodelink)):
+            url = episodelink[y][0]
+            if '/sources/' in url:
+                #urllink = open_url(url)
+                #sourcelink = re.compile('{"sources":".+?partnerid=30&docid=(.+?)"').findall(urllink)
+                url = '' #sourcelink[0]
+                if len(url) > 0:
+                    url = 'https://drive.google.com/file/d/' + url
+            if len(url) > 0:                    
+                subtitle = episodelink[y][1]
+                title = movie_name + ' (' + subtitle +')'
+                temp = [url,title,movie_img,''] 
+                a.append(temp)
+                                
+    
     for url2, title, img, stype in a:
         title = title.replace('&#8211;',"-").replace('&#8217;',"'").replace('&amp;', '&').replace('&#038;', '&').replace('&#8230;', '...').replace('&#8216;', '\'').replace('&nbsp;', '') 
         if len(title)>0 and len(url2)>0:    
