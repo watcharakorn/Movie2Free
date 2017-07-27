@@ -363,18 +363,38 @@ def list_episodes(url):
                                 if len(url)>0:
                                     temp = [url,title,movie_img,stype] 
                                     a.append(temp)
-
+    
+    episodelink = re.compile('<video.+?<source src="(.+?)"').findall(html)
+    if len(episodelink) >0:
+        for y in range(0, len(episodelink)):
+            url = episodelink[y]
+            if len(url) > 0:                    
+                title = movie_name 
+                temp = [url,title,movie_img,''] 
+                a.append(temp)
+    
+    episodelink = re.compile('<iframe src="(.+?)"').findall(html)
+    if len(episodelink) >0:
+        for y in range(0, len(episodelink)):
+            url = episodelink[y]
+            if len(url) > 0:                    
+                title = movie_name 
+                temp = [url,title,movie_img,''] 
+                a.append(temp)
+                
     episodelink = re.compile('<a class="btn-video" data-video="(.+?)".+?data-video-title="(.+?)"').findall(html)
     
     if len(episodelink) >0:
         for y in range(0, len(episodelink)):
             url = episodelink[y][0]
             if '/sources/' in url:
-                #urllink = open_url(url)
-                #sourcelink = re.compile('{"sources":".+?partnerid=30&docid=(.+?)"').findall(urllink)
-                url = '' #sourcelink[0]
-                if len(url) > 0:
-                    url = 'https://drive.google.com/file/d/' + url
+                urllink = open_url(url)
+                sourcelink = re.compile('{"sources":"(.+?)"').findall(urllink)
+                url = ''
+                if len(sourcelink)>0:
+                    url = sourcelink[0]
+                #if len(url) > 0:
+                #    url = 'https://drive.google.com/file/d/' + url
             if len(url) > 0:                    
                 subtitle = episodelink[y][1]
                 title = movie_name + ' (' + subtitle +')'

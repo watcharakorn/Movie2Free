@@ -66,6 +66,9 @@
 *version:2.1.3
 *-fix movies episode list
 *<17/07/2017>
-*version:2.1.3
+*version:2.1.4
+*-fix movies episode list
+*<27/07/2017>
+*version:2.1.5
 *-fix movies episode list
  
